@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import db from "./CarouselDB";
 import Slide from "./Slide";
+import CarouselSets from "./CarouselSets";
 import lArr from "./img/left.svg";
 import rArr from "./img/right.svg";
 import styles from "./Carousel.module.css";
@@ -11,6 +12,9 @@ class Carousel extends Component {
     this.state = {
       imagesArr: db,
       currentSlideId: 0,
+      isSlideShowOn: false,
+      slideShowKey: null,
+      slideShowDelay: 5,
     };
   }
 
@@ -31,22 +35,61 @@ class Carousel extends Component {
       : (currentSlideId - 1 + length) % length;
   };
 
+  slideShowHandler = () => {
+    const { isSlideShowOn, slideShowKey, slideShowDelay } = this.state;
+    if (isSlideShowOn) {
+      clearInterval(slideShowKey);
+    } else {
+      this.setState({
+        slideShowKey: setInterval(
+          () => this.forwardClickHndlr(),
+          slideShowDelay * 1000
+        ),
+      });
+    }
+    this.setState({
+      isSlideShowOn: !isSlideShowOn,
+    });
+  };
+
+  slideShowDelayChange = (v) => {
+    const { slideShowKey, slideShowDelay } = this.state;
+    this.setState({
+      slideShowDelay: isNaN(v) || v <= 0 ? 5 : v,
+    });
+    clearInterval(slideShowKey);
+    this.setState({
+      slideShowKey: setInterval(
+        () => this.forwardClickHndlr(),
+        slideShowDelay * 1000
+      ),
+    });
+  };
+
   render() {
     return (
-      <div className={styles.carouselWrapper}>
-        <img
-          src={lArr}
-          alt=""
-          onClick={this.backClickHndlr}
-          className={styles.carouselArrowL}
-        />
-        <Slide slideObj={this.state.imagesArr[this.state.currentSlideId]} />
-        <img
-          src={rArr}
-          alt=""
-          onClick={this.forwardClickHndlr}
-          className={styles.carouselArrowR}
-        />
+      <div className={styles.carouselOuterWrapper}>
+        <div className={styles.carouselInnerWrapper}>
+          <img
+            src={lArr}
+            alt=""
+            onClick={this.backClickHndlr}
+            className={styles.carouselArrowL}
+          />
+          <Slide slideObj={this.state.imagesArr[this.state.currentSlideId]} />
+          <img
+            src={rArr}
+            alt=""
+            onClick={this.forwardClickHndlr}
+            className={styles.carouselArrowR}
+          />
+          <CarouselSets
+            isSlideShowOn={this.state.isSlideShowOn}
+            slideShowHandler={this.slideShowHandler}
+            slideShowDelayChange={this.slideShowDelayChange}
+            slideShowDelay={this.state.slideShowDelay}
+          />
+        </div>
       </div>
     );
   }

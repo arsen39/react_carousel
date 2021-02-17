@@ -1,0 +1,11 @@
+.carouselSetsWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  position: absolute;
+  left: 40%;
+  top: 107%;
+}
+
+.carouselSetsSlideshowBtn{
+  margin-right: 20px;
+}

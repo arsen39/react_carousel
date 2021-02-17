@@ -1,4 +1,10 @@
-.carouselWrapper{
+.carouselOuterWrapper{
+display: flex;
+flex-flow: row nowrap;
+justify-content: center;
+}
+
+.carouselInnerWrapper{
   position: relative;
   display: flex;
   flex-flow: row nowrap;
