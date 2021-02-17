@@ -1,0 +1,24 @@
+.carouselWrapper{
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  width: 1000px;
+  height: 700px;
+}
+
+.carouselArrowL,
+.carouselArrowR{
+  position: absolute;
+  cursor: pointer;
+}
+
+.carouselArrowL{
+  right: 95%;
+  top: 40%;
+}
+
+.carouselArrowR{
+  left: 95%;
+  top: 40%;
+}
