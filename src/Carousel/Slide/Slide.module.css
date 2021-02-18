@@ -12,10 +12,27 @@
 }
 
 .slideArticle {
+  background-color: #f5f5f5;
 }
 
 .slideHeader {
 }
 
 .slideDesc {
+}
+
+.carouselArrowL,
+.carouselArrowR{
+  position: absolute;
+  cursor: pointer;
+}
+
+.carouselArrowL{
+  right: 95%;
+  top: 40%;
+}
+
+.carouselArrowR{
+  left: 95%;
+  top: 40%;
 }

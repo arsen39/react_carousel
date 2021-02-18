@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import db from "./CarouselDB";
 import Slide from "./Slide";
 import CarouselSets from "./CarouselSets";
-import lArr from "./img/left.svg";
-import rArr from "./img/right.svg";
 import styles from "./Carousel.module.css";
 
 class Carousel extends Component {
@@ -18,9 +16,7 @@ class Carousel extends Component {
     };
   }
 
-  backClickHndlr = () => this.slideClickHndlr(false);
-
-  forwardClickHndlr = () => this.slideClickHndlr(true);
+  
 
   slideClickHndlr = (isForward) =>
     this.setState({
@@ -42,7 +38,7 @@ class Carousel extends Component {
     } else {
       this.setState({
         slideShowKey: setInterval(
-          () => this.forwardClickHndlr(),
+          () => this.slideClickHndlr(true),
           slideShowDelay * 1000
         ),
       });
@@ -60,7 +56,7 @@ class Carousel extends Component {
     clearInterval(slideShowKey);
     this.setState({
       slideShowKey: setInterval(
-        () => this.forwardClickHndlr(),
+        () => this.slideClickHndlr(true),
         slideShowDelay * 1000
       ),
     });
@@ -70,19 +66,8 @@ class Carousel extends Component {
     return (
       <div className={styles.carouselOuterWrapper}>
         <div className={styles.carouselInnerWrapper}>
-          <img
-            src={lArr}
-            alt=""
-            onClick={this.backClickHndlr}
-            className={styles.carouselArrowL}
-          />
-          <Slide slideObj={this.state.imagesArr[this.state.currentSlideId]} />
-          <img
-            src={rArr}
-            alt=""
-            onClick={this.forwardClickHndlr}
-            className={styles.carouselArrowR}
-          />
+          
+          <Slide slideObj={this.state.imagesArr[this.state.currentSlideId]} slideClickHndlr={this.slideClickHndlr} />
 
           <CarouselSets
             isSlideShowOn={this.state.isSlideShowOn}
