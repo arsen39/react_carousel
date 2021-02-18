@@ -55,7 +55,7 @@ class Carousel extends Component {
   slideShowDelayChange = (v) => {
     const { slideShowKey, slideShowDelay } = this.state;
     this.setState({
-      slideShowDelay: isNaN(v) || v <= 0 ? 5 : v,
+      slideShowDelay: isNaN(v) || v <= 0 ? 1 : v,
     });
     clearInterval(slideShowKey);
     this.setState({
@@ -83,6 +83,7 @@ class Carousel extends Component {
             onClick={this.forwardClickHndlr}
             className={styles.carouselArrowR}
           />
+
           <CarouselSets
             isSlideShowOn={this.state.isSlideShowOn}
             slideShowHandler={this.slideShowHandler}

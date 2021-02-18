@@ -18,7 +18,7 @@ const CarouselSets = (props) => {
         className={styles.carouselSetsSlideshowBtn}
         onClick={slideshowBtnClick}
       />
-      <input type="number" onChange={slideShowDelayChangeHndl} value={slideShowDelay}/>
+      <input className={styles.slideShowInput} type="number" onChange={slideShowDelayChangeHndl} value={slideShowDelay}/>
     </div>
   );
 };
